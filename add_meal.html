@@ -1,0 +1,415 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Meal | NutriCare</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        .container {
+            width: 650px;
+            max-width: 92%;
+            margin: 50px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #159447;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        select:focus,
+        input:focus {
+            border-color: #159447;
+        }
+
+        .calorie-box {
+            background: #e8f7ed;
+            border: 1px solid #b8e5c7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 10px;
+            margin-bottom: 25px;
+        }
+
+        .calorie-box p {
+            color: #52705d;
+            margin-bottom: 8px;
+        }
+
+        .calorie-box h2 {
+            color: #159447;
+            margin: 0;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        button,
+        .cancel {
+            padding: 13px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button {
+            border: none;
+            background: #159447;
+            color: white;
+        }
+
+        button:hover {
+            background: #107a39;
+        }
+
+        .cancel {
+            border: 1px solid #d1d5db;
+            color: #374151;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                margin: 25px auto;
+                padding: 25px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+    <h1>
+        🥗 Add Meal
+    </h1>
+
+    <p class="subtitle">
+        Add a food item to your daily meal plan.
+    </p>
+
+
+    {% if error %}
+
+    <div class="error">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    {% if foods %}
+
+    <form method="POST" action="/add-meal">
+
+
+        <!-- MEAL TYPE -->
+
+        <div class="form-group">
+
+            <label>
+                Meal Type
+            </label>
+
+            <select name="meal_type" required>
+
+                <option value="">
+                    -- Select Meal Type --
+                </option>
+
+                <option value="Breakfast">
+                    🌅 Breakfast
+                </option>
+
+                <option value="Lunch">
+                    ☀️ Lunch
+                </option>
+
+                <option value="Dinner">
+                    🌙 Dinner
+                </option>
+
+                <option value="Snack">
+                    🍎 Snack
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- FOOD -->
+
+        <div class="form-group">
+
+            <label>
+                Food
+            </label>
+
+            <select
+                name="food_name"
+                id="foodSelect"
+                required
+                onchange="calculateCalories()"
+            >
+
+                <option value="">
+                    -- Select Food --
+                </option>
+
+                {% for food in foods %}
+
+                <option
+                    value="{{ food['food_name'] }}"
+                    data-calories="{{ food['calories'] or 0 }}"
+                >
+                    {{ food['food_name'] }}
+                    — {{ food['calories'] or 0 }} kcal
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <!-- QUANTITY -->
+
+        <div class="form-group">
+
+            <label>
+                Quantity
+            </label>
+
+            <input
+                type="number"
+                name="quantity"
+                id="quantity"
+                value="1"
+                min="0.1"
+                step="0.1"
+                required
+                oninput="calculateCalories()"
+            >
+
+            <small style="color:#6b7280;">
+                Example: 1 = one serving, 2 = two servings
+            </small>
+
+        </div>
+
+
+        <!-- DATE -->
+
+        <div class="form-group">
+
+            <label>
+                Meal Date
+            </label>
+
+            <input
+                type="date"
+                name="date"
+                id="date"
+                required
+            >
+
+        </div>
+
+
+        <!-- CALORIES -->
+
+        <div class="calorie-box">
+
+            <p>
+                Estimated Calories
+            </p>
+
+            <h2>
+                <span id="calories">
+                    0
+                </span>
+                kcal
+            </h2>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <button type="submit">
+                Save Meal
+            </button>
+
+            <a href="/meals" class="cancel">
+                Cancel
+            </a>
+
+        </div>
+
+
+    </form>
+
+    {% else %}
+
+    <div class="error">
+
+        No food items are available.
+
+        <br><br>
+
+        Please add foods in the
+        <strong>Food Database</strong>
+        first.
+
+    </div>
+
+    <a href="/foods" class="cancel">
+        Go to Food Database
+    </a>
+
+    {% endif %}
+
+
+</div>
+
+
+<script>
+
+    // Set today's date automatically
+
+    const dateInput =
+        document.getElementById("date");
+
+    if (dateInput) {
+
+        const today =
+            new Date().toISOString().split("T")[0];
+
+        dateInput.value = today;
+
+    }
+
+
+    // Calculate calories
+
+    function calculateCalories() {
+
+        const foodSelect =
+            document.getElementById("foodSelect");
+
+        const quantityInput =
+            document.getElementById("quantity");
+
+        const calorieDisplay =
+            document.getElementById("calories");
+
+
+        if (!foodSelect || !quantityInput) {
+            return;
+        }
+
+
+        const selectedOption =
+            foodSelect.options[
+                foodSelect.selectedIndex
+            ];
+
+
+        const caloriesPerServing =
+            parseFloat(
+                selectedOption.dataset.calories
+            ) || 0;
+
+
+        const quantity =
+            parseFloat(
+                quantityInput.value
+            ) || 0;
+
+
+        const total =
+            caloriesPerServing * quantity;
+
+
+        calorieDisplay.textContent =
+            total.toFixed(2);
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
+```

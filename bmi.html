@@ -1,0 +1,386 @@
+```html id="6u6t5w"
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BMI Calculator | NutriCare</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            color: #159447;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #123c2a;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #6b7280;
+        }
+
+        .calculator {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #159447;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            background: #159447;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #107a39;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* RESULT */
+
+        .result {
+            background: #e6f7ec;
+            border: 1px solid #b8e6c8;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .result h2 {
+            color: #123c2a;
+            margin-bottom: 10px;
+        }
+
+        .bmi-number {
+            font-size: 42px;
+            font-weight: bold;
+            color: #159447;
+            margin: 10px 0;
+        }
+
+        .status {
+            display: inline-block;
+            background: #159447;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* TABLE */
+
+        .history {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+        }
+
+        .history h2 {
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 550px;
+        }
+
+        th {
+            background: #123c2a;
+            color: white;
+            padding: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .badge {
+            background: #e6f7ec;
+            color: #159447;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .empty {
+            color: #6b7280;
+            padding: 20px 0;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <a href="/dashboard" class="back">
+            ← Back to Dashboard
+        </a>
+
+
+        <div class="header">
+
+            <h1>
+                ⚖️ BMI Calculator
+            </h1>
+
+            <p>
+                Calculate your Body Mass Index and track your records.
+            </p>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <!-- CALCULATOR -->
+
+        <div class="calculator">
+
+            <form method="POST">
+
+                <div class="form-group">
+
+                    <label for="height">
+                        Height (cm)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="height"
+                        name="height"
+                        step="0.1"
+                        min="1"
+                        placeholder="Example: 170"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="weight">
+                        Weight (kg)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="weight"
+                        name="weight"
+                        step="0.1"
+                        min="1"
+                        placeholder="Example: 65"
+                        required
+                    >
+
+                </div>
+
+
+                <button type="submit">
+                    Calculate BMI
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        {% if result %}
+
+        <div class="result">
+
+            <h2>
+                Your BMI Result
+            </h2>
+
+            <div class="bmi-number">
+                {{ bmi_value }}
+            </div>
+
+            <span class="status">
+                {{ status }}
+            </span>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- HISTORY -->
+
+        <div class="history">
+
+            <h2>
+                📋 BMI History
+            </h2>
+
+
+            {% if records %}
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Date</th>
+                            <th>Height</th>
+                            <th>Weight</th>
+                            <th>BMI</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for record in records %}
+
+                        <tr>
+
+                            <td>
+                                {{ record["created_at"] }}
+                            </td>
+
+                            <td>
+                                {{ record["height"] }} cm
+                            </td>
+
+                            <td>
+                                {{ record["weight"] }} kg
+                            </td>
+
+                            <td>
+                                <strong>
+                                    {{ record["bmi"] }}
+                                </strong>
+                            </td>
+
+                            <td>
+                                <span class="badge">
+                                    {{ record["status"] }}
+                                </span>
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <p class="empty">
+                No BMI records yet. Calculate your BMI to create your first record.
+            </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+```

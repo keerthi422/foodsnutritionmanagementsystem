@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NutriCare | Food Nutrition Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f7faf8;
+            color: #1f2937;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            width: 100%;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #159447;
+        }
+
+        .logo span {
+            color: #1f2937;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #159447;
+        }
+
+        .login-btn {
+            background: #159447;
+            color: white !important;
+            padding: 11px 22px;
+            border-radius: 8px;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 82vh;
+            padding: 70px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-content {
+            max-width: 620px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e6f7ec;
+            color: #159447;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.12;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #159447;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        .primary-btn {
+            background: #159447;
+            color: white;
+        }
+
+        .secondary-btn {
+            border: 2px solid #159447;
+            color: #159447;
+        }
+
+        .primary-btn:hover {
+            background: #107a39;
+        }
+
+        .secondary-btn:hover {
+            background: #159447;
+            color: white;
+        }
+
+        /* HERO CARD */
+
+        .nutrition-card {
+            width: 400px;
+            background: white;
+            padding: 35px;
+            border-radius: 22px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .food-icon {
+            text-align: center;
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .nutrition-card h2 {
+            text-align: center;
+            color: #159447;
+            margin-bottom: 10px;
+        }
+
+        .nutrition-card p {
+            text-align: center;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .nutrition-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 13px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .nutrition-row:last-child {
+            border-bottom: none;
+        }
+
+        /* FEATURES */
+
+        .features {
+            padding: 80px 7%;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #6b7280;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 42px;
+            margin-bottom: 18px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* ABOUT */
+
+        .about {
+            padding: 80px 7%;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 34px;
+            margin-bottom: 18px;
+        }
+
+        .about p {
+            max-width: 800px;
+            margin: auto;
+            color: #6b7280;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 28px;
+        }
+
+        footer p {
+            color: #cbd5e1;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 50px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .nutrition-card {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="logo">
+            🥗 Nutri<span>Care</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="/login" class="login-btn">
+                Login
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="tag">
+                🍎 Smart Nutrition Management
+            </div>
+
+            <h1>
+                Eat Smart.
+                <span>Live Healthy.</span>
+            </h1>
+
+            <p>
+                NutriCare helps you manage food, nutrition,
+                calories and healthy meal planning in one
+                simple and professional platform.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/login" class="primary-btn">
+                    Get Started
+                </a>
+
+                <a href="#features" class="secondary-btn">
+                    Explore Features
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- NUTRITION CARD -->
+
+        <div class="nutrition-card">
+
+            <div class="food-icon">
+                🥗
+            </div>
+
+            <h2>
+                Daily Nutrition
+            </h2>
+
+            <p>
+                Keep track of your essential
+                nutrition information.
+            </p>
+
+            <div class="nutrition-row">
+                <span>🔥 Calories</span>
+                <strong>2000 kcal</strong>
+            </div>
+
+            <div class="nutrition-row">
+                <span>💪 Protein</span>
+                <strong>75 g</strong>
+            </div>
+
+            <div class="nutrition-row">
+                <span>🌾 Carbohydrates</span>
+                <strong>250 g</strong>
+            </div>
+
+            <div class="nutrition-row">
+                <span>🥑 Fat</span>
+                <strong>65 g</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+
+    <section class="features" id="features">
+
+        <div class="section-title">
+
+            <h2>
+                Powerful Nutrition Features
+            </h2>
+
+            <p>
+                Everything you need for better food
+                and nutrition management.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🍎
+                </div>
+
+                <h3>
+                    Food Database
+                </h3>
+
+                <p>
+                    Store and manage food items with
+                    calories, protein, carbohydrates,
+                    fats and other nutrition details.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔥
+                </div>
+
+                <h3>
+                    Calorie Calculator
+                </h3>
+
+                <p>
+                    Calculate daily calorie requirements
+                    and monitor your food intake.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ⚖️
+                </div>
+
+                <h3>
+                    BMI Calculator
+                </h3>
+
+                <p>
+                    Calculate BMI and understand your
+                    healthy weight range.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🥗
+                </div>
+
+                <h3>
+                    Meal Planner
+                </h3>
+
+                <p>
+                    Create healthy daily meal plans
+                    based on nutrition requirements.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Nutrition Reports
+                </h3>
+
+                <p>
+                    View nutrition information and
+                    progress through simple reports.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    👤
+                </div>
+
+                <h3>
+                    User Management
+                </h3>
+
+                <p>
+                    Manage user profiles and keep
+                    nutrition records organized.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="about" id="about">
+
+        <h2>
+            About NutriCare
+        </h2>
+
+        <p>
+            NutriCare is a Food Nutrition Management System
+            designed to make nutrition tracking easier.
+            The system provides tools for food management,
+            calorie calculation, BMI analysis, meal planning
+            and nutrition reporting through a user-friendly
+            interface.
+        </p>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 NutriCare - Food Nutrition Management System
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

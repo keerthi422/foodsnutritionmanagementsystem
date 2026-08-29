@@ -1,0 +1,437 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NutriCare | Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(
+                135deg,
+                #e8f8ee,
+                #f7faf8
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 900px;
+            max-width: 92%;
+            min-height: 520px;
+
+            background: white;
+
+            display: flex;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 15px 45px
+                rgba(0, 0, 0, 0.12);
+        }
+
+        /* LEFT SIDE */
+
+        .left {
+            width: 50%;
+
+            background: linear-gradient(
+                145deg,
+                #159447,
+                #0d7438
+            );
+
+            color: white;
+
+            padding: 55px 45px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+
+            margin-bottom: 30px;
+        }
+
+        .logo span {
+            color: #d9ffe5;
+        }
+
+        .food-icon {
+            font-size: 75px;
+
+            margin-bottom: 25px;
+        }
+
+        .left h1 {
+            font-size: 38px;
+
+            line-height: 1.2;
+
+            margin-bottom: 18px;
+        }
+
+        .left p {
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            color: #e2f8e9;
+        }
+
+        .benefits {
+            margin-top: 28px;
+        }
+
+        .benefits p {
+            margin: 12px 0;
+        }
+
+        /* RIGHT SIDE */
+
+        .right {
+            width: 50%;
+
+            padding: 55px 50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right h2 {
+            font-size: 30px;
+
+            margin-bottom: 8px;
+
+            color: #1f2937;
+        }
+
+        .subtitle {
+            color: #6b7280;
+
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: 600;
+
+            color: #374151;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        .form-group input:focus {
+            border-color: #159447;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(21, 148, 71, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #159447;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+        }
+
+        .login-btn:hover {
+            background: #107a39;
+        }
+
+        .error {
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            margin-bottom: 18px;
+
+            font-size: 14px;
+
+            text-align: center;
+        }
+
+        .back-home {
+            text-align: center;
+
+            margin-top: 22px;
+        }
+
+        .back-home a {
+            color: #159447;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+
+        .demo {
+            margin-top: 25px;
+
+            padding: 12px;
+
+            background: #f0fdf4;
+
+            border: 1px solid #bbf7d0;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            color: #166534;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .container {
+                flex-direction: column;
+
+                min-height: auto;
+            }
+
+            .left,
+            .right {
+                width: 100%;
+            }
+
+            .left {
+                padding: 40px 30px;
+
+                text-align: center;
+            }
+
+            .left h1 {
+                font-size: 30px;
+            }
+
+            .benefits {
+                display: none;
+            }
+
+            .right {
+                padding: 40px 30px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <!-- LEFT SECTION -->
+
+        <div class="left">
+
+            <div class="logo">
+                🥗 Nutri<span>Care</span>
+            </div>
+
+            <div class="food-icon">
+                🍎
+            </div>
+
+            <h1>
+                Welcome Back!
+            </h1>
+
+            <p>
+                Manage your nutrition, meals,
+                calories and health information
+                with NutriCare.
+            </p>
+
+            <div class="benefits">
+
+                <p>✓ Track your daily nutrition</p>
+
+                <p>✓ Manage healthy meals</p>
+
+                <p>✓ Calculate BMI & calories</p>
+
+                <p>✓ View nutrition reports</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SECTION -->
+
+        <div class="right">
+
+            <h2>
+                Sign In
+            </h2>
+
+            <p class="subtitle">
+                Login to your NutriCare account
+            </p>
+
+
+            <!-- ERROR MESSAGE -->
+
+            {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            <!-- LOGIN FORM -->
+
+            <form action="/login" method="POST">
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <!-- DEFAULT LOGIN -->
+
+            <div class="demo">
+
+                <strong>Demo Admin</strong><br>
+
+                Username: admin<br>
+
+                Password: admin123
+
+            </div>
+
+
+            <!-- BACK -->
+
+            <div class="back-home">
+
+                <a href="/">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+```

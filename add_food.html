@@ -1,0 +1,319 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Food | NutriCare</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 650px;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: #123c2a;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 28px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #374151;
+        }
+
+        input,
+        select {
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #159447;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        button,
+        .cancel {
+            flex: 1;
+            padding: 13px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        button {
+            border: none;
+            background: #159447;
+            color: white;
+        }
+
+        button:hover {
+            background: #107a39;
+        }
+
+        .cancel {
+            border: 1px solid #d1d5db;
+            color: #374151;
+            background: #f9fafb;
+        }
+
+        @media (max-width: 600px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="form-container">
+
+        <h1>🍎 Add Food</h1>
+
+        <p class="subtitle">
+            Enter the nutritional information of the food.
+        </p>
+
+
+        <form method="POST">
+
+            <div class="form-grid">
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Food Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="food_name"
+                        placeholder="Example: Brown Rice"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select name="category">
+
+                        <option value="Grains">
+                            Grains
+                        </option>
+
+                        <option value="Fruits">
+                            Fruits
+                        </option>
+
+                        <option value="Vegetables">
+                            Vegetables
+                        </option>
+
+                        <option value="Protein">
+                            Protein
+                        </option>
+
+                        <option value="Dairy">
+                            Dairy
+                        </option>
+
+                        <option value="Beverages">
+                            Beverages
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Calories (kcal)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="calories"
+                        step="0.01"
+                        min="0"
+                        placeholder="Example: 130"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Protein (g)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="protein"
+                        step="0.01"
+                        min="0"
+                        placeholder="Example: 2.7"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Carbohydrates (g)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="carbohydrates"
+                        step="0.01"
+                        min="0"
+                        placeholder="Example: 28"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Fat (g)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="fat"
+                        step="0.01"
+                        min="0"
+                        placeholder="Example: 0.3"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Fiber (g)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="fiber"
+                        step="0.01"
+                        min="0"
+                        placeholder="Example: 1.6"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <a href="/foods" class="cancel">
+                    Cancel
+                </a>
+
+                <button type="submit">
+                    Save Food
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
+```
